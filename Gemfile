@@ -20,4 +20,5 @@ group :development do
   gem "pry"
   gem "shotgun"
   gem "tux"
+  gem "capybara"
 end

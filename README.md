@@ -1,7 +1,8 @@
 
 ## Sinatra ActiveRecord CRUD
 
-1. 
+1. Implement all four CRUD actions in a Sinatra application
+2. Explain how each CRUD action corresponds to a controller action and POST request
 
 ## Instructions
 
@@ -17,7 +18,7 @@ Next, you'll need to set up the corresponding `Post` model. Make sure the class 
 
 Now that we have the database and model set up, it's time to set up the ability to create a blog post.
 
-We need to create an erb with a form that POSTs to a controller action that creates the post and saves it to the database.
+We need to create an erb file with a form that POSTs to a controller action. The controller action should use the Create CRUD action to create the blog post and save it to the database.
 
 ### Read
 
@@ -35,11 +36,4 @@ Create a form to update a specific blog post, and POSTs to a controller action t
 
 ### Delete
 
-The Delete CRUD action corresponds to the delete controller action. 
-
-
-## Resources
-
-* [Stack Exchange](http://www.stackexchange.com) - [Some Question on Stack Exchange](http://www.stackexchange.com/questions/123)
-
-# Sinatra Ar Crud Lab
+The Delete CRUD action corresponds to the delete controller action. You'll need to create a GET request that loads a form to delete a single post. You'll need to use a dynamic route, which contains the blog post's ID. The form doesn't need any input fields, just a submit button. The form should POST to a delete controller action, which will delete the post from the database.
