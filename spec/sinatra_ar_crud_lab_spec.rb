@@ -69,7 +69,10 @@ describe "Blog Post App" do
     end
 
     it 'displays the exisiting object in the edit form' do 
-      get "/posts/#{@post2.id}/edit"
+      visit "/posts/#{@post2.id}/edit"
+      expect(page.body).to include("#{@post2.name}")
+      expect(page.body).to include("#{@post2.content}")
+
     end
 
     it "saves edits to a blog post" do
