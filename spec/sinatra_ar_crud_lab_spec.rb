@@ -26,38 +26,41 @@ describe "Blog Post App" do
   end
 
   describe "Read Action " do
+    describe 'index action' do 
+      it 'responds with a 200 status code' do
+        get "/posts"
+        expect(last_response.status).to eq(200)
+      end
 
-    it 'index action responds with a 200 status code' do
-      get "/posts"
-      expect(last_response.status).to eq(200)
+      it "displays all the blog posts" do
+        get "/posts"
+        expect(last_response.body).to include(post_name)
+        expect(last_response.body).to include(@post2.name)
+      end
     end
 
-    it "index action displays all the blog posts" do
-      get "/posts"
-      expect(last_response.body).to include(post_name)
-      expect(last_response.body).to include(@post2.name)
-    end
+    describe 'show action' do 
+      it 'show page responds with a 200 status code' do
+        get "/posts/#{@post1.id}"
+        expect(last_response.status).to eq(200)
+      end
 
-    it 'show page responds with a 200 status code' do
-      get "/posts/#{@post1.id}"
-      expect(last_response.status).to eq(200)
-    end
+      it "show page displays the post's name" do
+        get "/posts/#{@post1.id}"
+        expect(last_response.body).to include(post_name)
+      end
 
-    it "show page displays the post's name" do
-      get "/posts/#{@post1.id}"
-      expect(last_response.body).to include(post_name)
-    end
-
-    it "show page displays the post's content" do
-      get "/posts/#{@post1.id}"
-      expect(last_response.body).to include(post_content)
+      it "show page displays the post's content" do
+        get "/posts/#{@post1.id}"
+        expect(last_response.body).to include(post_content)
+      end
     end
 
    
   end
 
 
-  describe "UPDATE ACTION" do
+  describe "update action" do
 
 
     it 'responds with a 200 status code' do
@@ -65,7 +68,14 @@ describe "Blog Post App" do
       expect(last_response.status).to eq(200)
     end
 
-    it "saves edits a blog post" do
+    it 'displays the exisiting object in the edit form' do 
+      visit "/posts/#{@post2.id}/edit"
+      expect(page.body).to include("#{@post2.name}")
+      expect(page.body).to include("#{@post2.content}")
+
+    end
+
+    it "saves edits to a blog post" do
       visit "/posts/#{@post2.id}/edit"
       fill_in :name, :with => "Second Post!!"
       fill_in :content, :with => "this is the best blog post ever written"
@@ -77,7 +87,7 @@ describe "Blog Post App" do
 
   end
 
-  describe "DELETE ACTION" do
+  describe "delete action" do
 
 
     it 'responds with a 200 status code' do
