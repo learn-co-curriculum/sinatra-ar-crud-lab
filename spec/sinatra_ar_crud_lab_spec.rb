@@ -68,7 +68,11 @@ describe "Blog Post App" do
       expect(last_response.status).to eq(200)
     end
 
-    it "saves edits a blog post" do
+    it 'displays the exisiting object in the edit form' do 
+      get "/posts/#{@post2.id}/edit"
+    end
+
+    it "saves edits to a blog post" do
       visit "/posts/#{@post2.id}/edit"
       fill_in :name, :with => "Second Post!!"
       fill_in :content, :with => "this is the best blog post ever written"
