@@ -91,12 +91,12 @@ describe "Blog Post App" do
 
 
     it 'responds with a 200 status code' do
-      get "/posts/#{@post2.id}/delete"
+      get "/posts/#{@post2.id}"
       expect(last_response.status).to eq(200)
     end
 
     it "deletes a blog post from the database" do
-      visit "/posts/#{@post2.id}/delete"
+      visit "/posts/#{@post2.id}"
       click_button "delete"
       expect(Post.all.count).to eq(1)
       expect(Post.last.name).to eq("Hello World")
