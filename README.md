@@ -2,11 +2,13 @@
 ## Sinatra ActiveRecord CRUD
 
 1. Implement all four CRUD actions in a Sinatra application
-2. Explain how each CRUD action corresponds to a controller action and POST request
+2. Understand how each CRUD action corresponds to a controller action and POST request
 
 ## Instructions
 
 We've had a lot of practice with the ActiveRecord CRUD actions, so now it's time to tie them to controller actions in a Sinatra application. In this lab, you'll be building a basic blog post app, using every CRUD action.
+
+**Important:** In Sinatra, the order in which you define your routes in a controller matters. Routes are matched in the order they are defined. So, if we were define the `get '/posts/:id'` route *before* the `get 'posts/new'` route, Sinatra would feed all requests for `posts/new` to the `posts/:id` route and we should see an error telling us that your app is unable to find a `Post` instance with an `id` of `"new"`. The takeaway is that you should define your `/new` route *before* your `/posts/:id` route. 
 
 ### Database
 
@@ -18,22 +20,29 @@ Next, you'll need to set up the corresponding `Post` model. Make sure the class 
 
 Now that we have the database and model set up, it's time to set up the ability to create a blog post.
 
-We need to create an erb file with a form that POSTs to a controller action. The controller action should use the Create CRUD action to create the blog post and save it to the database.
+First, create a route in your controller, `get 'posts/new'`, that renders the `new.erb` view. 
+
+We need to create an erb file in the views directory, `new.erb`, with a form that POSTs to a controller action, `/posts`. The controller action should use the Create CRUD action to create the blog post and save it to the database. Then, renders, with `erb`, the index view page. 
 
 ### Read
 
-The Read CRUD action corresponds to two different controller actions: show and index.
+The Read CRUD action corresponds to two different controller actions: show and index. The show action should render the erb view `show.erb`, which shows an individual post. The index action should render the erb view `index.erb`, which shows a list of *all* the posts. 
 
-We need to create two controller actions: one to view an individual blog post, and one to view all the blog posts.
+Create the `get '/posts'` controller action. This action should use Active Record to grab *all* of the posts and store them in an instance variable, `@posts`. Then, it should render the `index.erb` view. That view should use erb to iterate over `@posts` and render them on the page. 
 
-Create two controller actions, each with a corresponding view.
+Create the `get '/posts/:id'` controller action. This action should use Active Record to grab the post with the `id` that is in the params and set it equal to `@post`. Then, it should render the `show.erb` view page. That view should use erb to render the `@post`'s title and content. 
+
 
 ### Update
 
-The Update CRUD action corresponds to the edit controller action. 
+The Update CRUD action corresponds to the edit controller action and view. 
 
-Create a form to update a specific blog post, and POSTs to a controller action that updates the information in the browser.
+Create a controller action, `get 'posts/:id/edit`, that renders the view, `edit.erb`. This view should contain a form to update a specific blog post and POSTs to a controller action, `post '/posts/:id`. 
 
 ### Delete
 
-The Delete CRUD action corresponds to the delete controller action. You'll need to create a GET request that loads a form to delete a single post. You'll need to use a dynamic route, which contains the blog post's ID. The form doesn't need any input fields, just a submit button. The form should POST to a delete controller action, which will delete the post from the database.
+The Delete CRUD action corresponds to the delete controller action, `post '/posts/:id/delete'` However, we *won't* make a specific "delete" view page, as that isn't really conventional. Instead, we'll just add a "delete button" to the show page. This "button" will actually be a form, disguised as a button (intriguing, I know). The form will send a POST request to the delete controller action, where we will identify the post to delete and delete it. Then, the action should redirect to the `get '/posts'` route. 
+
+#### Making our Delete "Button"
+
+In order to make a form that looks like a button, all we need to do it make a form that has no input fields, only a "submit" button with a value of "delete". So, give your form a method of `"post"` and an action of `"/posts/:id/delete'`, and make sure there are no input fields, only the aforementioned button. Make sure to dynamically set the `:id` of the form action!
