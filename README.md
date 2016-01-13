@@ -47,7 +47,7 @@ You'll need to make sure the edit form includes:
 
 ### Delete
 
-The Delete CRUD action corresponds to the delete controller action, `delete '/posts/:id/delete'` However, we *won't* make a specific "delete" view page, as that isn't really conventional. Instead, we'll just add a "delete button" to the show page. This "button" will actually be a form, disguised as a button (intriguing, I know). The form will send a POST request to the delete controller action, where we will identify the post to delete and delete it. Then, the action should redirect to the `get '/posts'` route. 
+The Delete CRUD action corresponds to the controller action, `post '/posts/:id/delete'` However, we *won't* make a specific "delete" view page, as that isn't really conventional. Instead, we'll just add a "delete button" to the show page. This "button" will actually be a form, disguised as a button (intriguing, I know). The form will send a POST request to the delete controller action, where we will identify the post to delete and delete it. Then, the action should redirect to the `get '/posts'` route. 
 
 #### Making our Delete "Button"
 
