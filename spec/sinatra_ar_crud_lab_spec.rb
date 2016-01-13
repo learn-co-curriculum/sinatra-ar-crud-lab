@@ -106,6 +106,11 @@ describe "Blog Post App" do
       expect(page.body).to include("this is even better than the last")
     end
 
+    it "submits the form via a patch request" do
+      visit "/posts/#{@post2.id}/edit"
+      expect(find("#hidden", :visible => false).value).to eq("patch")
+    end
+
   end
 
   describe "delete action" do
@@ -127,6 +132,11 @@ describe "Blog Post App" do
       visit "/posts/#{@post2.id}"
       click_button "delete"
       expect(page.current_path).to eq("/posts")
+    end
+
+    it "submits the form via a delete request" do
+      visit "/posts/#{@post2.id}"
+      expect(find("#hidden", :visible => false).value).to eq("delete")
     end
 
   end
