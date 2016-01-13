@@ -39,9 +39,11 @@ The Update CRUD action corresponds to the edit controller action and view.
 
 Create a controller action, `get 'posts/:id/edit`, that renders the view, `edit.erb`. This view should contain a form to update a specific blog post and POSTs to a controller action, `post '/posts/:id`. 
 
+**Reminder:** Remeber to use the `use Rack::MethodOverride` to your `config.ru` file so that your app will know how to handle `patch` and `delete` requests!
+
 ### Delete
 
-The Delete CRUD action corresponds to the delete controller action, `post '/posts/:id/delete'` However, we *won't* make a specific "delete" view page, as that isn't really conventional. Instead, we'll just add a "delete button" to the show page. This "button" will actually be a form, disguised as a button (intriguing, I know). The form will send a POST request to the delete controller action, where we will identify the post to delete and delete it. Then, the action should redirect to the `get '/posts'` route. 
+The Delete CRUD action corresponds to the delete controller action, `delete '/posts/:id/delete'` However, we *won't* make a specific "delete" view page, as that isn't really conventional. Instead, we'll just add a "delete button" to the show page. This "button" will actually be a form, disguised as a button (intriguing, I know). The form will send a POST request to the delete controller action, where we will identify the post to delete and delete it. Then, the action should redirect to the `get '/posts'` route. 
 
 #### Making our Delete "Button"
 
