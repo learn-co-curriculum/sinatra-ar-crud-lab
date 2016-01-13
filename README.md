@@ -37,12 +37,18 @@ Create the `get '/posts/:id'` controller action. This action should use Active R
 
 The Update CRUD action corresponds to the edit controller action and view. 
 
-Create a controller action, `get 'posts/:id/edit`, that renders the view, `edit.erb`. This view should contain a form to update a specific blog post and POSTs to a controller action, `post '/posts/:id`. 
+Create a controller action, `get 'posts/:id/edit`, that renders the view, `edit.erb`. This view should contain a form to update a specific blog post and POSTs to a controller action, `patch '/posts/:id`. 
+
+You'll need to make sure the edit form includes:
+
+```html
+<input id="hidden" type="hidden" name="_method" value="patch">
+```
 
 ### Delete
 
-The Delete CRUD action corresponds to the delete controller action, `post '/posts/:id/delete'` However, we *won't* make a specific "delete" view page, as that isn't really conventional. Instead, we'll just add a "delete button" to the show page. This "button" will actually be a form, disguised as a button (intriguing, I know). The form will send a POST request to the delete controller action, where we will identify the post to delete and delete it. Then, the action should redirect to the `get '/posts'` route. 
+The Delete CRUD action corresponds to the controller action, `post '/posts/:id/delete'` However, we *won't* make a specific "delete" view page, as that isn't really conventional. Instead, we'll just add a "delete button" to the show page. This "button" will actually be a form, disguised as a button (intriguing, I know). The form will send a POST request to the delete controller action, where we will identify the post to delete and delete it. Then, the action should redirect to the `get '/posts'` route. 
 
 #### Making our Delete "Button"
 
-In order to make a form that looks like a button, all we need to do it make a form that has no input fields, only a "submit" button with a value of "delete". So, give your form a method of `"post"` and an action of `"/posts/:id/delete'`, and make sure there are no input fields, only the aforementioned button. Make sure to dynamically set the `:id` of the form action!
+In order to make a form that looks like a button, all we need to do it make a form that has no input fields, only a "submit" button with a value of "delete". So, give your form tag a method of `"post"` and an action of `"/posts/:id/delete'`, and the aforementioned button. Make sure to dynamically set the `:id` of the form action! You'll also need to make sure the form includes the hidden input tag to change the request from `post` to `delete`.
