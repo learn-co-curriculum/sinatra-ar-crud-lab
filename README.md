@@ -45,7 +45,7 @@ You'll need to make sure the edit form includes:
 <input id="hidden" type="hidden" name="_method" value="patch">
 ```
 
-**Reminder:** Remeber to use the `use Rack::MethodOverride` to your `config.ru` file so that your app will know how to handle `patch` and `delete` requests!
+**Reminder:** Remember to use the `use Rack::MethodOverride` to your `config.ru` file so that your app will know how to handle `patch` and `delete` requests!
 
 ### Delete
 
