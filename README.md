@@ -8,7 +8,7 @@
 
 We've had a lot of practice with the ActiveRecord CRUD actions, so now it's time to tie them to controller actions in a Sinatra application. In this lab, you'll be building a basic blog post app, using every CRUD action.
 
-**Important:** In Sinatra, the order in which you define your routes in a controller matters. Routes are matched in the order they are defined. So, if we were define the `get '/posts/:id'` route *before* the `get 'posts/new'` route, Sinatra would feed all requests for `posts/new` to the `posts/:id` route and we should see an error telling us that your app is unable to find a `Post` instance with an `id` of `"new"`. The takeaway is that you should define your `/new` route *before* your `/posts/:id` route. 
+**Important:** In Sinatra, the order in which you define your routes in a controller matters. Routes are matched in the order they are defined. So, if we were define the `get '/posts/:id'` route *before* the `get 'posts/new'` route, Sinatra would feed all requests for `posts/new` to the `posts/:id` route and we should see an error telling us that your app is unable to find a `Post` instance with an `id` of `"new"`. The takeaway is that you should define your `/new` route *before* your `/posts/:id` route.
 
 ### Database
 
@@ -20,9 +20,9 @@ Next, you'll need to set up the corresponding `Post` model. Make sure the class 
 
 Now that we have the database and model set up, it's time to set up the ability to create a blog post.
 
-First, create a route in your controller, `get 'posts/new'`, that renders the `new.erb` view. 
+First, create a route in your controller, `get '/posts/new'`, that renders the `new.erb` view. 
 
-We need to create an erb file in the views directory, `new.erb`, with a form that POSTs to a controller action, `/posts`. The controller action should use the Create CRUD action to create the blog post and save it to the database. Then, renders, with `erb`, the index view page. 
+We need to create an erb file in the views directory, `new.erb`, with a form that POSTs to a controller action, `/posts`. The controller action should use the Create CRUD action to create the blog post and save it to the database. Then, uses `erb` to render the index view page. 
 
 ### Read
 
@@ -37,7 +37,7 @@ Create the `get '/posts/:id'` controller action. This action should use Active R
 
 The Update CRUD action corresponds to the edit controller action and view. 
 
-Create a controller action, `get 'posts/:id/edit`, that renders the view, `edit.erb`. This view should contain a form to update a specific blog post and POSTs to a controller action, `patch '/posts/:id`. 
+Create a controller action, `get '.posts/:id/edit`, that renders the view, `edit.erb`. This view should contain a form to update a specific blog post and POSTs to a controller action, `patch '/posts/:id`. 
 
 You'll need to make sure the edit form includes:
 
@@ -54,4 +54,4 @@ The Delete CRUD action corresponds to the delete controller action, `delete '/po
 #### Making our Delete "Button"
 
 In order to make a form that looks like a button, all we need to do it make a form that has no input fields, only a "submit" button with a value of "delete". So, give your form tag a method of `"post"` and an action of `"/posts/:id/delete'`, and the aforementioned button. Make sure to dynamically set the `:id` of the form action! You'll also need to make sure the form includes the hidden input tag to change the request from `post` to `delete`.
-<p data-visibility='hidden'>View <a href='https://learn.co/lessons/sinatra-ar-crud-lab' title='Sinatra ActiveRecord CRUD'>Sinatra ActiveRecord CRUD</a> on Learn.co and start learning to code for free.</p>
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/sinatra-ar-crud-lab'>Sinatra ActiveRecord CRUD</a> on Learn.co and start learning to code for free.</p>
