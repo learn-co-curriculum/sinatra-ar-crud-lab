@@ -22,7 +22,7 @@ Now that we have the database and model set up, it's time to set up the ability 
 
 First, create a route in your controller, `get '/posts/new'`, that renders the `new.erb` view. 
 
-We need to create an erb file in the views directory, `new.erb`, with a form that POSTs to a controller action, `/posts`. The controller action should use the Create CRUD action to create the blog post and save it to the database. Then, uses `erb` to render the index view page. 
+We need to create an erb file in the views directory, `new.erb`, with a form that POSTs to a controller action, `/posts`. The controller action should use the Create CRUD action to create the blog post and save it to the database. Then, uses `redirect` to `/posts` to route us via `get` to the index view page. 
 
 ### Read
 
