@@ -37,7 +37,7 @@ Create the `get '/posts/:id'` controller action. This action should use Active R
 
 The Update CRUD action corresponds to the edit controller action and view. 
 
-Create a controller action, `get '.posts/:id/edit`, that renders the view, `edit.erb`. This view should contain a form to update a specific blog post and POSTs to a controller action, `patch '/posts/:id`. 
+Create a controller action, `get '/posts/:id/edit`, that renders the view, `edit.erb`. This view should contain a form to update a specific blog post and POSTs to a controller action, `patch '/posts/:id`. 
 
 You'll need to make sure the edit form includes:
 
