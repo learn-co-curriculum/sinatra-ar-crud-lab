@@ -80,7 +80,7 @@ describe "Blog Post App" do
       expect(last_response.status).to eq(200)
     end
 
-    it 'displays the exisiting object in the edit form' do 
+    it 'displays the existing object in the edit form' do 
       visit "/posts/#{@post2.id}/edit"
       expect(page.body).to include("#{@post2.name}")
       expect(page.body).to include("#{@post2.content}")
