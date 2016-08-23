@@ -37,7 +37,7 @@ Create the `get '/posts/:id'` controller action. This action should use Active R
 
 The Update CRUD action corresponds to the edit controller action and view. 
 
-Create a controller action, `get '/posts/:id/edit`, that renders the view, `edit.erb`. This view should contain a form to update a specific blog post and POSTs to a controller action, `patch '/posts/:id`. 
+Create a controller action, `get '/posts/:id/edit'`, that renders the view, `edit.erb`. This view should contain a form to update a specific blog post and POSTs to a controller action, `patch '/posts/:id'`. 
 
 You'll need to make sure the edit form includes:
 
@@ -55,3 +55,5 @@ The Delete CRUD action corresponds to the delete controller action, `delete '/po
 
 In order to make a form that looks like a button, all we need to do it make a form that has no input fields, only a "submit" button with a value of "delete". So, give your form tag a method of `"post"` and an action of `"/posts/:id/delete'`, and the aforementioned button. Make sure to dynamically set the `:id` of the form action! You'll also need to make sure the form includes the hidden input tag to change the request from `post` to `delete`.
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/sinatra-ar-crud-lab'>Sinatra ActiveRecord CRUD</a> on Learn.co and start learning to code for free.</p>
+
+<p class='util--hide'>View <a href='https://learn.co/lessons/sinatra-ar-crud-lab'>Sinatra ActiveRecord CRUD</a> on Learn.co and start learning to code for free.</p>
