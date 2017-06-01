@@ -8,7 +8,7 @@
 
 We've had a lot of practice with the ActiveRecord CRUD actions, so now it's time to tie them to controller actions in a Sinatra application. In this lab, you'll be building a basic blog post app, using every CRUD action.
 
-**Important:** In Sinatra, the order in which you define your routes in a controller matters. Routes are matched in the order they are defined. So, if we were to define the `get '/posts/:id'` route *before* the `get 'posts/new'` route, Sinatra would feed all requests for `posts/new` to the `posts/:id` route and we should see an error telling us that your app is unable to find a `Post` instance with an `id` of `"new"`. The takeaway is that you should define your `/new` route *before* your `/posts/:id` route.
+**Important:** In Sinatra, the order in which you define your routes in a controller matters. Routes are matched in the order they are defined. So, if we were to define the `get '/posts/:id'` route *before* the `get '/posts/new'` route, Sinatra would feed all requests for `/posts/new` to the `/posts/:id` route and we should see an error telling us that your app is unable to find a `Post` instance with an `id` of `"new"`. The takeaway is that you should define your `/posts/new` route *before* your `/posts/:id` route.
 
 ### Database
 
