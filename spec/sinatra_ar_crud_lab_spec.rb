@@ -133,7 +133,7 @@ describe "Blog Post App" do
       click_button "delete"
       expect(page.body).to include("#{@post2.name} was deleted")
     end
-
+    
     it "submits the form via a delete request" do
       visit "/posts/#{@post2.id}"
       expect(find("#hidden", :visible => false).value).to eq("delete")
