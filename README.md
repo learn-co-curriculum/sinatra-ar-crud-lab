@@ -1,8 +1,8 @@
 ## Sinatra ActiveRecord CRUD
 
-1. Implement all four CRUD actions in a Sinatra application.
-2. Understand how each CRUD action corresponds to a controller action and `POST`
-   request.
+1.  Implement all four CRUD actions in a Sinatra application.
+2.  Understand how each CRUD action corresponds to a controller action and `POST`
+    request.
 
 ## Instructions
 
@@ -78,12 +78,11 @@ requests!
 
 ### Delete
 
-The Delete CRUD action corresponds to the delete controller action, `delete
-'/articles/:id'`. To initiate this action, we'll add a "delete" button to the
+The Delete CRUD action corresponds to the delete controller action, `delete '/articles/:id'`. To initiate this action, we'll add a "delete" button to the
 show page. This button will be in a form, but since the form isn't visible by
 default, you should only be able to see the button (intriguing, I know). The
 form will send a request to the delete controller action, where we will
-identify the article to delete and delete it.  Then, the action should redirect
+identify the article to delete and delete it. Then, the action should redirect
 to the index of all articles — we can't go back to the show page, since the
 article has been deleted!
 
