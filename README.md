@@ -20,7 +20,7 @@ your `/articles/new` route _before_ your `/articles/:id` route.
 
 ### Database
 
-First, you'll need to create the `articles` table. An article should have a name
+First, you'll need to create the `articles` table. An article should have a title
 and content.
 
 Next, set up the corresponding `Article` model. Make sure the class inherits from `ActiveRecord::Base`.
