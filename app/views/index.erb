@@ -1,6 +1,9 @@
-<% @posts.all.each do |post| %>
-  <div>
-    <p><%= post.name%> </p>
-    <p><%= post.content %></p>
-  </div>
+<ul>
+<% @articles.each do |article| %>
+  <li>
+    <a href="/articles/<%= article.id %>">
+      <%= article.title %> 
+    </a>
+  </li>
 <% end %>
+</ul>
