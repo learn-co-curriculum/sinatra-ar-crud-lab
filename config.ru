@@ -1,4 +1,4 @@
-ENV["SINATRA_ENV"] = "test"
+
 require './config/environment'
 
 begin
