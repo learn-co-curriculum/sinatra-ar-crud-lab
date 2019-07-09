@@ -7,10 +7,7 @@ def fi_check_migration
   begin
     ActiveRecord::Migration.check_pending!
   rescue ActiveRecord::PendingMigrationError
-    raise ActiveRecord::PendingMigrationError.new <<-EX_MSG
-Migrations are pending. To resolve this issue, run:
-      rake db:migrate SINATRA_ENV=test
-EX_MSG
+    raise ActiveRecord::PendingMigrationError.new "Migrations are pending.\nTo resolve this issue, run: \nrake db:migrate SINATRA_ENV=#{ENV['SINATRA_ENV']}"
   end
 end
 
