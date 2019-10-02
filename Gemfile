@@ -8,7 +8,7 @@ gem 'pry-nav'
 gem 'rake'
 gem 'rspec'
 gem 'rack-test'
-gem 'database_cleaner', git: 'https://github.com/bmabey/database_cleaner.git'
+gem 'database_cleaner', '~> 1.6.0'
 gem 'require_all'
 
 
