@@ -63,8 +63,8 @@ view should use ERB to render the `@article`'s title and content.
 The Update CRUD action corresponds to the edit controller action and view.
 
 Create a controller action, `get '/articles/:id/edit'`, that renders the view,
-`edit.erb`. This view should contain a form to update a specific article and
-`POST`s to a controller action, `patch '/articles/:id'`.
+`edit.erb`. This view should contain a form to update a specific article. The 
+form should `POST` to a controller action, `patch '/articles/:id'`.
 
 You'll need to make sure the edit form includes:
 
