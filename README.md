@@ -68,15 +68,15 @@ The Update CRUD action corresponds to the edit controller action and view.
 Create a controller action, `get '/articles/:id/edit'`, that renders the view
 `edit.erb`. This view should contain a form to update a specific article--similar to the form
 you made for a new article, but the fields should be pre-populated with the existing title and
-content of the article. Although we want to send a `PATCH` request to `/articles/:id`, we have to
-be a little sneaky to trick HTML into letting us do something besides a `GET` or a `POST`.  
-Define the controller action `patch '/articles/:id'`, but your form will be configured to send
-a `POST` in the `method` attribute, and include:
+content of the article. 
+
+Define the controller action `patch '/articles/:id'`.  Although we want to send a `PATCH` request to `/articles/:id` to process the form, we have to be a little sneaky to trick HTML into letting us do something besides a `GET` or a `POST`.  
+Your form will be configured to send a POST request in its method attribute, but then we'll have Sinatra override it: Inside the form itself, add a hidden field to specify a PATCH request like so:
 ```html
 <input id="hidden" type="hidden" name="_method" value="PATCH">
 ```
  
-**Reminder:** Remember to add the `use Rack::MethodOverride` to your
+**Reminder:** Add the `use Rack::MethodOverride` to your
 `config.ru` file so that your app will know how to handle `PATCH`, `PUT`, and `DELETE`
 requests!
 
@@ -96,7 +96,8 @@ article has been deleted!
 #### Making our Delete "Button"
 
 Give your form tag a method of `POST` and an action of `"/articles/:id'`.
-Make sure to dynamically set the `:id` of the form action to reflect the! You'll also need to
+Make sure to dynamically set the `:id` of the form action to reflect the id 
+of the article you're editing! You'll also need to
 make sure the form includes the hidden input tag to change the request from
 `POST` to `DELETE`, similar to how we constructed the `PATCH` request above
 
