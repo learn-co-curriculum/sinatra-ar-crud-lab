@@ -15,31 +15,20 @@ controller matters. Routes are matched in the order they are defined. So, if we
 were to define the `get '/articles/:id'` route _before_ the `get '/articles/new'`
 route, Sinatra would feed all requests for `/articles/new` to the `/articles/:id`
 route and we should see an error telling us that your app is unable to find an
-`Article` instance with an `id` of `"new"`. The takeaway is that you should define
-your `/articles/new` route _before_ your `/articles/:id` route.
+`Article` instance with an `id` of `"new"`. *The takeaway is that you should define
+your `/articles/new` route _before_ your `/articles/:id` route.*
 
 ### Database
 
-First, you'll need to create the `articles` table. An article should have a title
-and content.
+First, you'll need to create the `articles` table. An article should have a title (string)
+and content (string).
 
 Next, set up the corresponding `Article` model. Make sure the class inherits from `ActiveRecord::Base`.
 
-### Create
-
-Now that we have the database and model set up, it's time to set up the ability
-to create an article.
-
-First, create a route in your controller, `get '/articles/new'`, that renders the
-`new.erb` view.
-
-We need to create an ERB file in the views directory, `new.erb`, with a form
-that `POST`s to a controller action, `/articles`. The controller action should use
-the Create CRUD action to create the article and save it to the database.
-When the form on `new.erb` is submitted, the action, pointing to `/articles`,
-will redirect to another action which will trigger a render of a `show.erb` file
-automatically. Before we can fully test if our form is working, we need to create
-that `show.erb` file, as our site will currently crash upon submission.
+If you've done everything correctly, you should be able to run `rake db:seed` to populate your database 
+with a few sample articles.  Spend some time in `rake console` and make sure you know how to retrieve
+all of the articles as well as get a single article using its id.  Create at least one article of 
+your own from inside the console.
 
 ### Read
 
@@ -58,42 +47,58 @@ Active Record to grab the article with the `id` that is in the `params` and set
 it equal to `@article`. Then, it should render the `show.erb` view page. That
 view should use ERB to render the `@article`'s title and content.
 
+### Create
+
+Now it's time to set up the ability to create an article.
+
+First, create a route in your controller:  `get '/articles/new'`, that renders the
+`new.erb` view.  This view will be a blank form that should submit a `POST` request
+to `/articles`.  (Look up the method and action attributes for HTML forms if you
+aren't sure how to do this).
+
+Now you will need to tell your controller what to do when your form sends that
+`POST` request, so create a route on your controller `post '/articles'` that creates a new
+article from the `params` from the form, then redirects to that new article's show page.
+
+
 ### Update
 
 The Update CRUD action corresponds to the edit controller action and view.
 
-Create a controller action, `get '/articles/:id/edit'`, that renders the view,
-`edit.erb`. This view should contain a form to update a specific article. The 
-form should `POST` to a controller action, `patch '/articles/:id'`.
+Create a controller action, `get '/articles/:id/edit'`, that renders the view
+`edit.erb`. This view should contain a form to update a specific article--similar to the form
+you made for a new article, but the fields should be pre-populated with the existing title and
+content of the article. 
 
-You'll need to make sure the edit form includes:
-
+Define the controller action `patch '/articles/:id'`.  Although we want to send a `PATCH` request to `/articles/:id` to process the form, we have to be a little sneaky to trick HTML into letting us do something besides a `GET` or a `POST`.  
+Your form will be configured to send a POST request in its method attribute, but then we'll have Sinatra override it: Inside the form itself, add a hidden field to specify a PATCH request like so:
 ```html
 <input id="hidden" type="hidden" name="_method" value="PATCH">
 ```
-
-**Reminder:** Remember to add the `use Rack::MethodOverride` to your
+ 
+**Reminder:** Add the `use Rack::MethodOverride` to your
 `config.ru` file so that your app will know how to handle `PATCH`, `PUT`, and `DELETE`
 requests!
+
+(This is confusing and weird, and you should ask questions about it!)
 
 ### Delete
 
 The Delete CRUD action corresponds to the delete controller action, `delete
 '/articles/:id'`. To initiate this action, we'll add a "delete" button to the
-show page. This button will be in a form, but since the form isn't visible by
-default, you should only be able to see the button (intriguing, I know). The
-form will send a request to the delete controller action, where we will
-identify the article to delete and delete it.  Then, the action should redirect
+*show page* (i.e., deleting won't have its own view). This button will be in a form, 
+but the form won't have any other fields in it... just the single button. 
+The form will send a request to the delete controller action, 
+where we will identify the article to delete and delete it.  Then, the action should redirect
 to the index of all articles — we can't go back to the show page, since the
 article has been deleted!
 
 #### Making our Delete "Button"
 
-In order to make a form that looks like a button, all we need to do is make a
-form that has no input fields, only a "submit" button with a value of "delete".
-So, give your form tag a method of `POST` and an action of `"/articles/:id'`.
-Make sure to dynamically set the `:id` of the form action! You'll also need to
+Give your form tag a method of `POST` and an action of `"/articles/:id'`.
+Make sure to dynamically set the `:id` of the form action to reflect the id 
+of the article you're editing! You'll also need to
 make sure the form includes the hidden input tag to change the request from
-`POST` to `DELETE`.
+`POST` to `DELETE`, similar to how we constructed the `PATCH` request above
 
 <p class='util--hide'>View <a href='https://learn.co/lessons/sinatra-ar-crud-lab'>Sinatra ActiveRecord CRUD</a> on Learn.co and start learning to code for free.</p>
