@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Magazine App" do
-  let(:article_title) { "Hello World!!!!" }
+  let(:article_title) { "Hello World" }
   let(:article_content) { "This is my first article!!!" }
 
   before do
