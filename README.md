@@ -1,4 +1,6 @@
-## Sinatra ActiveRecord CRUD
+# Sinatra Active Record CRUD Lab
+
+## Learning Goals
 
 1. Implement all four CRUD actions in a Sinatra application.
 2. Understand how each CRUD action corresponds to a controller action and `POST`
